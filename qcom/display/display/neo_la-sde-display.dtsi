@@ -1,14 +1,14 @@
 #include "neo-sde-display.dtsi"
 
-&sde_wb {
+&sde_wb1 {
+        status = "disabled";
+};
+
+&sde_wb2 {
         status = "disabled";
 };
 
 &sde_dsi {
-        status = "disabled";
-};
-
-&sde_dsi1 {
         status = "disabled";
 };
 
