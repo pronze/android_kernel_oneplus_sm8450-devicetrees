@@ -1,3 +1,4 @@
+ifneq ($(CONFIG_OPLUS_DEVICE_DTBS), y)
 ifneq ($(CONFIG_ARCH_QTI_VM), y)
 ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 dtbo-$(CONFIG_ARCH_LAHAINA) += lahaina-rumi-overlay.dtbo \
@@ -835,6 +836,7 @@ dtb-$(CONFIG_ARCH_QTI_VM) +=  \
 endif
 endif
 
+endif
 always-y	:= $(dtb-y)
 subdir-y	:= $(dts-dirs)
 subdir-y	+= audio camera cvp display eva mmrm video
