@@ -28,6 +28,20 @@
 
 #include "diwali-sde-display-pinctrl.dtsi"
 
+//#ifdef OPLUS_FEATURE_DISPLAY
+#include "dsi-panel-oplus21125samsung-ams662zs02-1080-2400-120hz-dsc-cmd.dtsi"
+
+&soc {
+	oplus_display_dev: oplus,dsi-display-dev {
+		oplus,dsi-panel-primary = <
+			&dsi_oplus21125samsung_ams662zs02_1080_2400_dsc_cmd
+		>;
+		oplus,dsi-panel-secondary = <>;
+		oplus,dsi-panel-extended = <>;
+	};
+};
+//#endif /* OPLUS_FEATURE_DISPLAY */
+
 &soc {
 	dsi_panel_pwr_supply_sim: dsi_panel_pwr_supply_sim {
 		#address-cells = <1>;
@@ -156,6 +170,33 @@
 		};
 	};
 
+//#ifdef OPLUS_FEATURE_DISPLAY
+	dsi_panel_oplus_pwr_supply: dsi_panel_oplus_pwr_supply {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		qcom,panel-supply-entry@0 {
+			reg = <0>;
+			qcom,supply-name = "vddio";
+			qcom,supply-min-voltage = <1800000>;
+			qcom,supply-max-voltage = <1800000>;
+			qcom,supply-enable-load = <200000>;
+			qcom,supply-disable-load = <80>;
+			qcom,supply-post-on-sleep = <0>;
+		};
+
+		qcom,panel-supply-entry@1 {
+			reg = <1>;
+			qcom,supply-name = "vci";
+			qcom,supply-min-voltage = <3000000>;
+			qcom,supply-max-voltage = <3000000>;
+			qcom,supply-enable-load = <2000>;
+			qcom,supply-disable-load = <0>;
+			qcom,supply-post-on-sleep = <0>;
+		};
+	};
+//#endif /* OPLUS_FEATURE_DISPLAY */
+
 	sde_dsi: qcom,dsi-display-primary {
 		compatible = "qcom,dsi-display";
 		label = "primary";
@@ -193,6 +234,15 @@
 		qcom,demura-panel-id = <0x0 0x0>;
 	};
 };
+
+
+//#ifdef OPLUS_FEATURE_UFF_FINGERPRINT
+&soc {
+        fingerprint_dev {
+                panel = <&dsi_oplus21125samsung_ams662zs02_1080_2400_dsc_cmd>;
+        };
+};
+//#endif /*OPLUS_FEATURE_UFF_FINGERPRINT*/
 
 /* PHY TIMINGS REVISION YL with reduced margins*/
 &dsi_r66451_amoled_video_cphy {
@@ -922,5 +972,11 @@
 			qcom,display-topology = <2 2 2>;
 			qcom,default-topology-index = <0>;
 		};
+	};
+};
+
+&soc {
+	oplus,comm {
+		oplus,display_panel = <&dsi_oplus21125samsung_ams662zs02_1080_2400_dsc_cmd>;
 	};
 };
