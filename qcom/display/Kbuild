@@ -25,9 +25,9 @@ dtbo-y += \
 		display/waipio-sde-display-rumi-overlay.dtbo
 endif
 #PLUS_DTS_OVERLAY start
-dtbo-y += oplus/wly-20846-display-waipio-overlay.dtbo
-dtbo-y += oplus/udon-22803-display-cape-overlay.dtbo
-dtbo-y += oplus/ovaltine-21841-display-cape-overlay.dtbo
+dtbo-$(CONFIG_WLY_DTB) += oplus/wly-20846-display-waipio-overlay.dtbo
+dtbo-$(CONFIG_UDON_DTB) += oplus/udon-22803-display-cape-overlay.dtbo
+dtbo-$(CONFIG_OVALTINE_DTB) += oplus/ovaltine-21841-display-cape-overlay.dtbo
 #PLUS_DTS_OVERLAY end
 else
 dtbo-$(CONFIG_ARCH_WAIPIO) += display/trustedvm-waipio-sde-display-mtp-overlay.dtbo \
